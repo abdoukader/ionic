@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>transaction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Segment in content -->
+<div class="ion-padding">
+  <ion-segment [(ngModel)]="relationship" color="success">
+    <ion-segment-button value="envoie">
+      Envoie
+    </ion-segment-button>
+    <ion-segment-button value="retrait">
+      Retrait
+    </ion-segment-button>
+  </ion-segment>
+</div>
+
+<!-- Segment in envoie -->
+<div [(ngSwitch)]="relationship">
+  <ion-list *ngSwitchCase="'envoie'">
+
+    <ion-card class="loginForm" *ngIf="!isLoading">
+    <ion-card-content>
+        <form #f="ngForm">
+            <ion-item>
+                <ion-label position="floating">Nom envoyeur</ion-label>
+                <ion-input type="text" name="nomE" [(ngModel)]="envoieData.nomE"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Prenom envoyeur</ion-label>
+                <ion-input type="text" name="prenomE" [(ngModel)]="envoieData.prenomE" ></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Telephone envoyeur</ion-label>
+                <ion-input type="number" name="telE" [(ngModel)]="envoieData.telE"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Nom recepteur</ion-label>
+                <ion-input type="text" name="nomR" [(ngModel)]="envoieData.nomR"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Prenom recepteur</ion-label>
+                <ion-input type="text" name="prenomR" [(ngModel)]="envoieData.prenomR"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Telephone recepteur</ion-label>
+                <ion-input type="number" name="telR" [(ngModel)]="envoieData.telR"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Montant</ion-label>
+                <ion-input type="number" name="montant" [(ngModel)]="envoieData.montant"></ion-input>
+            </ion-item>
+            <ion-button type="submit" expand="block" (click)="envoie()"fill="outline" class="btnLogin">Envoyer</ion-button>
+        </form>
+    </ion-card-content>
+  </ion-card>
+  
+  </ion-list>
+</div>
+
+<!-- Segment in retrait -->
+<div [(ngSwitch)]="relationship">
+  <ion-list *ngSwitchCase="'retrait'">
+    <ion-card class="loginForm" *ngIf="!isLoading">
+    <ion-card-content>
+        <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+            <ion-item>
+                <ion-label position="floating">Code</ion-label>
+                <ion-input type="number" name="code" ngModel></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label position="floating">Carte d'identite</ion-label>
+                <ion-input type="number" name="cni" ngModel></ion-input>
+            </ion-item>
+            <ion-button type="submit" expand="block" fill="outline" class="btnLogin">Retirer</ion-button>
+        </form>
+    </ion-card-content>
+  </ion-card>
+  </ion-list>
+</div>
+</ion-content>
