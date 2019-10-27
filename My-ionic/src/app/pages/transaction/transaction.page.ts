@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { EnvoieService } from 'src/app/services/envoie.service';
-
+import { HttpClient } from 'selenium-webdriver/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-transaction',
@@ -10,27 +10,32 @@ import { EnvoieService } from 'src/app/services/envoie.service';
 })
 export class TransactionPage implements OnInit {
 
-  envoieData = {};
+  envoieData:any = {};
+  retraitData= {};
+  values = {};
+  Data: any={};
+
 
   constructor(private trans: EnvoieService) { }
 
   ngOnInit() {
   }
 
-  // envoyer(){
-  //   this.envoi.envoyer(this.envoyerE)
-  //     .subscribe(
-  //       res => {
-  //         console.log(res)
-  //         localStorage.setItem('access_token', res.jwt)
-  //         this.router.navigate(['/special'])
-  //       },
-  //       err => console.log(err)
-  //     )
-  // }
-
   envoie(){
     this.trans.envoie(this.envoieData)
+    .subscribe(
+      data => {
+        window.confirm('Envoie echoué');
+        console.log(data);
+      },
+      err=> {
+        window.confirm('Envoie reussie');
+      }
+    );
+  }
+
+  retrait(){
+    this.trans.retrait(this.retraitData)
     .subscribe(
       data => {
         window.confirm('Envoie reussie');
@@ -38,6 +43,22 @@ export class TransactionPage implements OnInit {
       },
       err=> {
         window.confirm('Envoie echoué');
+      }
+    );
+  }
+
+  onKey(){
+    //console.log(this.envoieData.montant);
+    this.trans.frais(this.envoieData.montant)
+    .subscribe(
+      res => {
+        
+        console.log(res);
+        this.values=res;
+      },
+      err=> {
+        console.log(err);
+
       }
     );
   }

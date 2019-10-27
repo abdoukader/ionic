@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>transaction</ion-title>
+    <ion-title routerLink="/home">Transaction</ion-title>
   </ion-toolbar>
 </ion-header>
 
+<div class="button" ></div>
 <ion-content>
   <!-- Segment in content -->
 <div class="ion-padding">
@@ -23,7 +24,7 @@
 
     <ion-card class="loginForm" *ngIf="!isLoading">
     <ion-card-content>
-        <form #f="ngForm">
+        <form #f="ngForm" #keyup>
             <ion-item>
                 <ion-label position="floating">Nom envoyeur</ion-label>
                 <ion-input type="text" name="nomE" [(ngModel)]="envoieData.nomE"></ion-input>
@@ -50,8 +51,12 @@
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Montant</ion-label>
-                <ion-input type="number" name="montant" [(ngModel)]="envoieData.montant"></ion-input>
+                <ion-input type="number" name="montant" (keyup)= "onKey(keyup.value)" [(ngModel)]="envoieData.montant"></ion-input>
             </ion-item>
+            <ion-item>
+                <ion-label position="floating">Les frais</ion-label>
+              <ion-input type="number" name="montant" value="{{values}}" readonly></ion-input>
+          </ion-item>
             <ion-button type="submit" expand="block" (click)="envoie()"fill="outline" class="btnLogin">Envoyer</ion-button>
         </form>
     </ion-card-content>
@@ -61,23 +66,34 @@
 </div>
 
 <!-- Segment in retrait -->
-<div [(ngSwitch)]="relationship">
+<div [(ngSwitch)]="relationship" class="row">
+    <div class="col-md-8">
   <ion-list *ngSwitchCase="'retrait'">
     <ion-card class="loginForm" *ngIf="!isLoading">
     <ion-card-content>
         <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
             <ion-item>
                 <ion-label position="floating">Code</ion-label>
-                <ion-input type="number" name="code" ngModel></ion-input>
+                <ion-input type="number" name="code" [(ngModel)]="retraitData.code"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label position="floating">Carte d'identite</ion-label>
-                <ion-input type="number" name="cni" ngModel></ion-input>
+                <ion-input type="number" name="cni" [(ngModel)]="retraitData.cni"></ion-input>
             </ion-item>
-            <ion-button type="submit" expand="block" fill="outline" class="btnLogin">Retirer</ion-button>
+            <ion-button type="submit" expand="block" (click)="retrait()"fill="outline" class="btnLogin">Retirer</ion-button>
         </form>
     </ion-card-content>
   </ion-card>
   </ion-list>
 </div>
+
+<ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-subtitle>vos transaction a partir des deux options</ion-card-subtitle>
+      <ion-card-title> SENEBA TRANSFERT </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Verifier bien les informations que vous saisissez svp</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

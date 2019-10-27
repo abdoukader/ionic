@@ -18,7 +18,11 @@ const routes: Routes = [
   
   { path: 'login', loadChildren: './pages/auth/login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './pages/auth/register/register.module#RegisterPageModule' },
-  { path: 'transaction', loadChildren: './pages/transaction/transaction.module#TransactionPageModule' }
+  { path: 'transaction', loadChildren: './pages/transaction/transaction.module#TransactionPageModule' },
+  { path: 'land', loadChildren: './pages/land/land.module#LandPageModule' },
+  { path: 'transactionliste', loadChildren: './transactionliste/transactionliste.module#TransactionlistePageModule' },
+  { path: 'detail', loadChildren: './detail/detail.module#DetailPageModule' },
+ 
 ];
 
 @NgModule({

@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+          </ion-buttons>
+      <ion-title>Detail</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-card>
+      <ion-card-header>
+        
+        <ion-card-title>CODE <span style=" color:red;">{{detail.code}} </span></ion-card-title>
+  
+      
+  
+        
+  
+      </ion-card-header>
+      <ion-card-content>
+          <h1 style="text-decoration: underline;text-align:center; color:green;">Expediteur</h1>
+  
+          Prenom : {{detail.prenomE}} <br>
+          Nom  : {{detail.nomE}}<br>
+          Téléphone  : {{detail.telE}}<br>
+      
+          Numero Piece : {{detail.cni}}<br>
+  
+          <h1 style="text-decoration: underline;text-align:center; color:green;">Beneficiaire</h1>
+          Prenom : {{detail.prenomR}}<br>
+          Nom  : {{detail.nomB}}<br>
+          Téléphone  : {{detail.telephoneR}}<br>
+          <h1 style="text-decoration: underline;text-align:center; color:green;">Operation</h1>
+          Montant :  {{detail.montant}} FCFA
+          Frais :  {{detail.Frais}}<br>
+          Commission Envoie :  {{detail.commiEvoie}}<br>
+          Date Envoie :  {{detail.date}}<br>
+          Commission Retrait : {{detail.commitRetrait}}<br>
+         
+      </ion-card-content>
+    </ion-card>
+  </ion-content>

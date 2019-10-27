@@ -6,10 +6,14 @@ import { HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class EnvoieService  {
+  tableau=[];
+  selectedTrans: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private transa :EnvoieService) { }
   
   private endpoint = 'http://127.0.0.1:8000/api/envoie';
+  private endpoint4 = 'http://127.0.0.1:8000/api/transac';
+  
 
   envoie(formData) {
 
@@ -25,5 +29,34 @@ export class EnvoieService  {
     console.log(formData1);
     return this.http.post(this.endpoint, formData1);
   }
+
+  private endpoint1 = 'http://127.0.0.1:8000/api/retrait';
+
+  retrait(formData) {
+
+    const formData2: FormData = new FormData();
+
+    formData2.append('cni',formData.cni);
+    formData2.append('code',formData.code)
   
+    console.log(formData);
+    return this.http.post(this.endpoint1, formData2);
+  }
+
+  private endpoint2 = 'http://127.0.0.1:8000/api/tarifs';
+
+  frais(formData) {
+
+    const formData3: FormData = new FormData();
+
+    formData3.append('montant',formData);
+    
+  
+    console.log(formData);
+    return this.http.post(this.endpoint2, formData3);
+  }
+  
+  listeTransaction(data) {
+    return this.http.post<any>(this.endpoint4 , data);
+   }
 }

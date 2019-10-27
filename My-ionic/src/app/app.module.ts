@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS }    from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { AuthService } from './services/auth.service';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AuthService } from './services/auth.service';
   ],
   providers: [
     StatusBar,
+    Geolocation,
     AuthService,
     SplashScreen,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true }
